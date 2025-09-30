@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+body{
+    
+    background-image: conic-gradient( to top, rgb(17, 24, 39), rgb(243, 244, 246), rgb(17, 24, 39));
+}

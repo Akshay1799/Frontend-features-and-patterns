@@ -5,6 +5,7 @@ const CRUD = () => {
     const [task, setTask] = useState('')
     const [todos, setTodos] = useState([])
 
+    // Adding a task
     const handleTasks = (e) => {
         e.preventDefault();
         if (task.trim() === '') return;
@@ -12,11 +13,13 @@ const CRUD = () => {
         setTask('');
     }
 
+    // Delete functionality
     const handleDelete = (index) => {
         const newList = todos.filter((_, i) => i !== index)
         setTodos(newList)
     }
 
+    // Here we are filtering the tasks by searching
     const filteredTodos = task.trim() === '' ? todos : todos.filter((todo) => todo.toLowerCase().includes(task.toLowerCase()))
 
     return (
@@ -27,6 +30,8 @@ const CRUD = () => {
                     <input value={task} onChange={(e) => setTask(e.target.value)} className='min-w-xl px-4 py-2 outline-none border border-gray-300 rounded-lg' type="text" placeholder='Add something...' />
                     <button onClick={handleTasks} className='px-4 py-2 bg-blue-500 hover:bg-blue-700 hover:cursor-pointer duration-300 ease-in border-none text-white border rounded-lg' type='button'>Add</button>
                 </div>
+
+                {/* Here we rendered the list conditionally */}
                 {todos && (
                     <div className='mt-12'>
                         <ul>

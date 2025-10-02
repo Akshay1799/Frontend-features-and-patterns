@@ -10,16 +10,26 @@ const CRUD = () => {
 
 
     useEffect(() => {
-
-        const saveTodos = JSON.parse(localStorage.getItem("todos"))
-        if (saveTodos) {
-            setTodos(saveTodos)
+        try {        
+            const saveTodos = localStorage.getItem("todos");
+            if(saveTodos){
+                const parsedTodos = JSON.parse(saveTodos)
+                setTodos(parsedTodos)
+            }
+        } catch (error) {
+            console.error("Error loading todos:", error);
         }
-
+        
     }, [])
 
     useEffect(() => {
-        localStorage.setItem("todos", JSON.stringify(todos))
+        if(todos.length > 0){
+            try {
+                localStorage.setItem("todos", JSON.stringify(todos))
+            } catch (error) {
+                console.error("Error saving todos:", error);
+            }
+        }
     }, [todos])
 
     // Adding a task
@@ -108,8 +118,8 @@ const CRUD = () => {
                                     ))}
                                 </ul>
                             </div>
-
                         )}
+
                     </div>
                 )}
             </div>
